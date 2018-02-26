@@ -1,0 +1,47 @@
+version: '2'
+
+networks:
+  gocd:
+
+services:
+  master:
+    image: gocd/kube-gocd-master
+    restart: always
+    networks:
+      gocd:
+        aliases:
+          - gocd-master-internal
+    ports:
+      - 8153:8153
+    env_file:
+      - vars.env
+
+  master-cron:
+    image: gocd/kube-gocd-master-cron
+    restart: always
+    network_mode: 'service:master'
+    env_file:
+      - vars.env
+
+  agent:
+    image: gocd/kube-gocd-agent
+    restart: always
+    networks:
+      gocd:
+    depends_on:
+      - master
+    volumes:
+      - build_data:/godata
+    env_file:
+      - vars.env
+
+  dind:
+    image: docker:stable-dind
+    restart: always
+    network_mode: 'service:agent'
+    volumes:
+      - build_data:/godata
+    privileged: true
+
+volumes:
+  build_data: {}

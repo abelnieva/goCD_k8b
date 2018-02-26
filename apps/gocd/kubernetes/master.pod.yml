@@ -1,0 +1,87 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: gocd-master
+spec:
+  serviceName: gocd-master-headless
+  replicas: 1
+  selector:
+    matchLabels:
+      app: master
+      tier: gocd
+  template:
+    metadata:
+      labels:
+        app: master
+        tier: gocd
+    spec:
+      securityContext:
+        fsGroup: 999
+      restartPolicy: Always
+      containers:
+      - name: agent 
+        image: $GCP_REGISTRY/kube-gocd-master:latest 
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: gocd-master-data
+          mountPath: /godata 
+        env:
+        - name: AGENT_AUTO_REGISTER_KEY
+          valueFrom:
+            secretKeyRef:
+              name: $SECRET_NAME 
+              key: agent_key
+        - name: GO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: $SECRET_NAME
+              key: user
+        - name: GO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: $SECRET_NAME 
+              key: pass
+        ports:
+        - containerPort: 8153
+        - containerPort: 8154
+  volumeClaimTemplates:
+  - metadata:
+      name: gocd-master-data
+      labels:
+        app: master
+        tier: gocd 
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 75Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gocd-master-internal
+spec:
+  ports:
+  - port: 8154
+    name: agent
+    targetPort: 8154
+  - port: 8153
+    name: http
+    targetPort: 8153
+  selector:
+    app: master
+    tier: gocd
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gocd-master-external
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    name: http
+    targetPort: 8153
+  selector:
+    app: master
+    tier: gocd
