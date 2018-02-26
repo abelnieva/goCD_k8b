@@ -1,18 +1,10 @@
 provider "google" {
   credentials  = "${file("credentials.json")}"
-  project      = "quixotic-galaxy-196119"
-  region       = "europe-west1"
+  project      = "${var.project}"
+  region       = "${var.subnet_region}"
 }
 
-# Uncomment this for remote state storage
-# You'll need to create the bucket first
-#terraform {
-#  backend "gcs" {
-#    bucket = "gocd-bucket-anieva"
-#    prefix   = "terraform.tfstate"
-#    project = "quixotic-galaxy-196119"
-#  }
-#}
+
 
 module "container" {
   source = "../modules/container"

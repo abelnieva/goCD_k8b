@@ -2,6 +2,10 @@
 
 deploying GoCD on kubernetes cluster (google cloud)
 
+## GOOGLE CLOUD AUTHENTICATION
+
+Get your credentials from google cloud , then save it as credentials.json into root project directory 
+
 ## DEFINE ENVIRONMENTS
 
 /envs
@@ -16,7 +20,7 @@ converge.rb manages all operations
 
 ### OPERATIONS
 
-#### CREATE 
+#### CREATE
 #### DESTROY
 #### APPS
 
