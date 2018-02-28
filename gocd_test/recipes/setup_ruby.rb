@@ -1,1 +1,3 @@
-include_recipe 'br-ruby::default'
+apt_package 'ruby' do
+  action :install
+end
