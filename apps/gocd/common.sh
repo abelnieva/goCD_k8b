@@ -42,7 +42,7 @@ gcloud container clusters get-credentials  $KUBE_CLUSTER --zone $subnet_region-c
 }
 
 function tag() {
-  docker tag gocd/$1:latest $GCP_REGISTRY/$1:latest
+  docker tag $1:latest $GCP_REGISTRY/$1:latest
 }
 
 function push() {

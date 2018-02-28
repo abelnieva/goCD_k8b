@@ -55,7 +55,7 @@ when "apps"
               status=system(cmd)
               puts "status: #{status}"
         when "deploy"
-              puts "####installing apps####"
+              puts "####deploying apps####"
               raise "no apps provided" unless !ARGV[3].to_s.empty?
               pathname_app = Pathname.new("./apps/#{ARGV[3]}/kubernetes-deploy.sh").realpath
               raise "#{ARGV[3] }app does not exist" unless pathname_app.file?

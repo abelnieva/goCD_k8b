@@ -11,7 +11,7 @@ gcloud_config
 gcloud_auth
 
 if [ ! "$1" = "--deploy-only" ]; then
-  /usr/bin/docker-compose -f $PATH_CURRENT/docker-compose.override.yml build
+  #/usr/bin/docker-compose -f $PATH_CURRENT/docker-compose.override.yml build
   /usr/bin/docker-compose -f $PATH_CURRENT/docker-compose.yml build
   tag_and_push "kube-gocd-master"
   tag_and_push "kube-gocd-master-cron"

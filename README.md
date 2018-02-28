@@ -7,6 +7,7 @@ deploying GoCD on kubernetes cluster (google cloud)
 Make sure to get everything installed before to start
 <pre>
 
+* ruby
 * terraform
 * docker engine
 * docker compose
@@ -63,7 +64,7 @@ This is the very first required operation, it needs to be done  once
 </pre>
 make sure get all envs settings in /envs/*
 
-## LISTING APPS AVAILABLES TO INSTALL
+## LISTING APPS AVAILABLE TO INSTALL
 <pre>
 
 ./converge.rb ./envs/dev/dev1.tfvars apps list

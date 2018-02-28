@@ -5,7 +5,8 @@ networks:
 
 services:
   master:
-    image: gocd/kube-gocd-master
+    build: ./master
+    image: kube-gocd-master
     restart: always
     networks:
       gocd:
@@ -17,14 +18,16 @@ services:
       - vars.env
 
   master-cron:
-    image: gocd/kube-gocd-master-cron
+    build: ./master-cron
+    image: kube-gocd-master-cron
     restart: always
     network_mode: 'service:master'
     env_file:
       - vars.env
 
   agent:
-    image: gocd/kube-gocd-agent
+    build: ./agent
+    image: kube-gocd-agent
     restart: always
     networks:
       gocd:
