@@ -11,13 +11,5 @@ docker_service 'default' do
   action [:create, :start]
 end
 
-docker_image "library/hello-world" do
-  action :pull
-end
-docker_container 'hello-world' do
-  repo 'library/hello-world'
-  tag 'latest'
-  action :run
-end
 
 include_recipe 'docker_compose::installation'
