@@ -70,10 +70,17 @@ make sure get all envs settings in /envs/*
 ./converge.rb ./envs/dev/dev1.tfvars apps list
 
 </pre>
-## INSTALLING  GO CD
+## BUILD & INSTALLING  GO CD
 <pre>
 
 ./converge.rb ./envs/dev/dev1.tfvars apps install gocd
+
+</pre>
+
+## INSTALLING  GO CD
+<pre>
+
+./converge.rb ./envs/dev/dev1.tfvars apps deploy gocd
 
 </pre>
 
@@ -86,5 +93,5 @@ converge.rb ./envs/dev/dev1.tfvars destroy
 
 ## TEST ENVIRONMENT
 
-Chef recipe, kitchen and google cloud help to test the software . 
-Check directory called gocd_test
+Chef recipe, kitchen and google cloud help to test the software .
+Check out README for test (directory called gocd_test)
