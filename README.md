@@ -72,7 +72,7 @@ make sure get all envs settings in /envs/*
 ## INSTALLING  GO CD
 <pre>
 
-./converge.rb ./envs/dev/dev1.tfvars apps install goc
+./converge.rb ./envs/dev/dev1.tfvars apps install gocd
 
 </pre>
 
