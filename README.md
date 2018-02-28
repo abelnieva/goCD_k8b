@@ -83,3 +83,8 @@ make sure get all envs settings in /envs/*
 converge.rb ./envs/dev/dev1.tfvars destroy
 
 </pre>
+
+## TEST ENVIRONMENT
+
+Chef recipe, kitchen and google cloud help to test the software . 
+Check directory called gocd_test
