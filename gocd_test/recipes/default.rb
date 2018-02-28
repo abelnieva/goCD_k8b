@@ -3,6 +3,7 @@
 # Recipe:: default
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
+include_recipe 'apt'
 include_recipe 'gocd_test::setup_ruby'
 include_recipe 'gocd_test::setup_docker'
 include_recipe 'gocd_test::setup_terraform'
