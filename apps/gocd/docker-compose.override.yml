@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  master:
+    build: ./master 
+
+  agent:
+    build: ./agent 
+ 
+  master-cron:
+    build: ./master-cron 

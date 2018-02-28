@@ -9,7 +9,7 @@ variable "env" {
 variable "subnet_range" {
   description = "The ip range for the subnet which kubernetes machines will be created in"
 }
-
 variable "subnet_region" {
-  description = "The subnet region"
+  description = "subnet_region"
+  default = "europe-west1"
 }

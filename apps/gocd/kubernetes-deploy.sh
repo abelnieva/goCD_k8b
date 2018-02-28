@@ -1,15 +1,24 @@
 #!/bin/bash -
 PATH_CURRENT="./apps/gocd"
+export STACK=$1
+export ENV=$2
+
 source $PATH_CURRENT/common.sh
 
+validate_config
+
+gcloud_config
+gcloud_auth
+
 if [ ! "$1" = "--deploy-only" ]; then
+  /usr/bin/docker-compose -f $PATH_CURRENT/docker-compose.override.yml build
   /usr/bin/docker-compose -f $PATH_CURRENT/docker-compose.yml build
   tag_and_push "kube-gocd-master"
   tag_and_push "kube-gocd-master-cron"
   tag_and_push "kube-gocd-agent"
 fi
 
-gcloud_auth $1
+
 
 if ! kubectl_cmd get namespaces | grep $KUBE_NAMESPACE &>/dev/null; then
 	kubectl_cmd create namespace $KUBE_NAMESPACE

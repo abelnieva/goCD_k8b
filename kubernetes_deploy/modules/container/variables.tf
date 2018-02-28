@@ -22,13 +22,11 @@ variable "cluster_username" {
 variable "cluster_password" {
   description = "The password for logging into kubernetes ui"
 }
-subnet_region
-
-
 variable "subnet_region" {
   description = "subnet_region"
   default = "europe-west1"
 }
 variable "initial_node_count" {
+
   description = "initial nodes number"
 }

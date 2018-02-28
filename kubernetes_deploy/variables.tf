@@ -28,3 +28,6 @@ variable "subnet_region" {
 variable "project" {
   description = "google cloud project id "
 }
+variable "initial_node_count" {
+  description = "initial nodes number"
+}

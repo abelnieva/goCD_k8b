@@ -18,7 +18,12 @@ stack=pathname.to_s.split('/').pop(2)[0]
 puts "env: #{env} stack: #{stack}"
 
 case action
-
+when "init"
+  puts "####Terraform Init####"
+  cmd = "terraform init kubernetes_deploy/"
+  puts "cmd: #{cmd}"
+  status=system(cmd)
+  puts "status: #{status}"
 when "create"
   puts "####Create####"
   cmd = "terraform apply -var=\"env=#{env}\" -var=\"stack=#{stack}\" -var-file=\"#{pathname}\" kubernetes_deploy/"
@@ -39,12 +44,22 @@ when "apps"
                 files.each do |file|
                   puts file.to_s.split("/").pop(1)
                 end
+                action=true
         when "install"
               puts "####installing apps####"
               raise "no apps provided" unless !ARGV[3].to_s.empty?
               pathname_app = Pathname.new("./apps/#{ARGV[3]}/kubernetes-deploy.sh").realpath
               raise "#{ARGV[3] }app does not exist" unless pathname_app.file?
-              cmd = "bash -c \"./apps/#{ARGV[3]}/kubernetes-deploy.sh #{stack}-#{env}\""
+              cmd = "bash -c \"./apps/#{ARGV[3]}/kubernetes-deploy.sh #{stack} #{env}\""
+              puts "cmd: #{cmd}"
+              status=system(cmd)
+              puts "status: #{status}"
+        when "deploy"
+              puts "####installing apps####"
+              raise "no apps provided" unless !ARGV[3].to_s.empty?
+              pathname_app = Pathname.new("./apps/#{ARGV[3]}/kubernetes-deploy.sh").realpath
+              raise "#{ARGV[3] }app does not exist" unless pathname_app.file?
+              cmd = "bash -c \"./apps/#{ARGV[3]}/kubernetes-deploy.sh #{stack} #{env} --deploy-only \""
               puts "cmd: #{cmd}"
               status=system(cmd)
               puts "status: #{status}"
