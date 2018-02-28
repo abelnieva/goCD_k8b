@@ -10,6 +10,7 @@ driver:
   service_account_scopes:
     - devstorage.read_write
     - userinfo.email
+    - cloud-platform
 
 provisioner:
   name: chef_zero
