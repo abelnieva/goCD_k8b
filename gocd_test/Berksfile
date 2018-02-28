@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+source 'https://supermarket.chef.io'
+
+metadata
+
+cookbook 'docker', '~> 4.0.1'
+cookbook 'terraform', '~> 1.0.2'
+cookbook 'docker_compose', '~> 0.1.1'
+cookbook 'kubectl', '~> 0.1.1'

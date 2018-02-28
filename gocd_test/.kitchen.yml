@@ -1,0 +1,38 @@
+---
+driver:
+  name: gce
+  project: quixotic-galaxy-196119
+  zone: us-east1-c
+  email: me@mycompany.com
+  tags:
+    - devteam
+    - test-kitchen
+  service_account_scopes:
+    - devstorage.read_write
+    - userinfo.email
+
+provisioner:
+  name: chef_zero
+
+transport:
+  name: sshtar
+  compression: zlib
+  compression_level: 9
+  username: chefuser
+
+platforms:
+  - name: ubuntu-16.04
+    driver:
+      image_project: ubuntu-os-cloud
+      image_family: ubuntu-1604-lts
+      metadata:
+        application: ubuntu
+        release: a
+        version: 1604
+
+
+suites:
+  - name: default
+    run_list:
+      - recipe[gocd_test::default]
+    attributes:
